@@ -1,7 +1,17 @@
-const Dashboard = () => {
-  return (
-    <div>Admin Dashboard</div>
-  )
-}
+import DashboardHeader from "../../components/dashboard/DashboardHeader";
+import StatsGrid from "../../components/dashboard/StatsGrid";
+import AnalyticsSection from "../../components/dashboard/AnalyticsSection";
 
-export default Dashboard
+const Dashboard = () => {
+    return (
+        <>
+            <DashboardHeader />
+
+            <StatsGrid />
+
+            <AnalyticsSection />
+        </>
+    );
+};
+
+export default Dashboard;

@@ -4,11 +4,18 @@ import AuthLayout from "../layouts/AuthLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import TeacherLayout from "../layouts/TeacherLayout";
 import StudentLayout from "../layouts/StudentLayout";
+import TasksLayout from "../layouts/TasksLayout";
 
 import Login from "../pages/auth/Login";
 import AdminDashboard from "../pages/admin/Dashboard";
 import TeacherDashboard from "../pages/teacher/Dashboard";
 import StudentDashboard from "../pages/student/Dashboard";
+
+import Tasks from "../pages/admin/tasks/Tasks";
+import CreateTask from "../pages/admin/tasks/CreateTask";
+import TaskDetails from "../pages/admin/tasks/TaskDetails";
+import EditTask from "../pages/admin/tasks/EditTask";
+
 import NotFound from "../pages/shared/NotFound";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -39,6 +46,31 @@ const router = createBrowserRouter([
                             {
                                 index: true,
                                 element: <AdminDashboard />,
+                            },
+                            {
+                                path: "/tasks",
+                                element: <TasksLayout />,
+                                children: [
+                                    {
+                                        path: "",
+                                        element: <Tasks />,
+                                    },
+
+                                    {
+                                        path: "/new",
+                                        element: <CreateTask />,
+                                    },
+
+                                    {
+                                        path: "/:taskId",
+                                        element: <TaskDetails />,
+                                    },
+
+                                    {
+                                        path: "/:taskId/edit",
+                                        element: <EditTask />,
+                                    },
+                                ],
                             },
                         ],
                     },

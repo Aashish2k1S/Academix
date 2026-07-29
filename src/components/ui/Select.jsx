@@ -1,14 +1,15 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
+import { ChevronDown } from "lucide-react";
 
-const Input = forwardRef(
+const Select = forwardRef(
     (
         {
             label,
             error,
             helperText,
-            leftIcon: LeftIcon,
-            rightIcon: RightIcon,
+            options = [],
+            placeholder = "Select an option",
             className,
             ...props
         },
@@ -26,36 +27,33 @@ const Input = forwardRef(
                 )}
 
                 <div className="relative">
-                    {LeftIcon && (
-                        <LeftIcon
-                            size={18}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 opacity-60"
-                        />
-                    )}
-
-                    <input
+                    <select
                         id={props.id}
                         ref={ref}
                         {...props}
                         className={clsx(
-                            "w-full rounded-xl border bg-transparent px-4 py-3 outline-none transition-all",
+                            "w-full appearance-none rounded-xl border bg-transparent px-4 py-3 pr-10 outline-none transition-all",
                             "border-white/10",
                             "focus:border-[accent]",
                             "focus:ring-2 focus:ring-[accent]/20",
-                            LeftIcon && "pl-10",
-                            RightIcon && "pr-10",
                             error &&
                                 "border-red-500 focus:border-red-500 focus:ring-red-500/20",
                             className,
                         )}
-                    />
+                    >
+                        <option value="">{placeholder}</option>
 
-                    {RightIcon && (
-                        <RightIcon
-                            size={18}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 opacity-60"
-                        />
-                    )}
+                        {options.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+
+                    <ChevronDown
+                        size={18}
+                        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 opacity-60"
+                    />
                 </div>
 
                 {error && <p className="text-sm text-red-500">{error}</p>}
@@ -68,6 +66,6 @@ const Input = forwardRef(
     },
 );
 
-Input.displayName = "Input";
+Select.displayName = "Select";
 
-export default Input;
+export default Select;

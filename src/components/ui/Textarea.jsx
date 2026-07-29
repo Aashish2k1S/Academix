@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
 
-const Input = forwardRef(
+const Textarea = forwardRef(
     (
         {
             label,
@@ -33,7 +33,7 @@ const Input = forwardRef(
                         />
                     )}
 
-                    <input
+                    <textarea
                         id={props.id}
                         ref={ref}
                         {...props}
@@ -68,6 +68,6 @@ const Input = forwardRef(
     },
 );
 
-Input.displayName = "Input";
+Textarea.displayName = "Textarea";
 
-export default Input;
+export default Textarea;

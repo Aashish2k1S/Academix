@@ -7,6 +7,7 @@ import taskReducer from "../features/tasks/taskSlice";
 import { saveAuth } from "../utils/localStorage";
 
 export const store = configureStore({
+    
     reducer: {
         auth: authReducer,
         ui: uiReducer,

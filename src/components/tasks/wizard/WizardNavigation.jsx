@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../ui/Button";
 
+import { useFormContext, handleSubmit } from "react-hook-form";
 import {
     nextStep,
     previousStep,
@@ -14,12 +15,29 @@ import {
 const WizardNavigation = () => {
     const dispatch = useDispatch();
 
+    const { trigger, getValues } = useFormContext();
+
     const { currentStep, draft } = useSelector((state) => state.tasks.wizard);
 
-    const handleNext = (data) => {
-        dispatch(setDraft(data));
+    const stepFields = {
+        1: ["title", "description", "subject", "department", "semester"],
+        2: ["assignmentMode", "assignedTeacher", "assignedStudents"],
+        3: ["priority", "status", "dueDate"],
+    };
+
+    const handleNext = async () => {
+        const valid = await trigger(stepFields[currentStep]);
+
+        if (!valid) return;
+
+        dispatch(setDraft(getValues()));
         dispatch(nextStep());
     };
+
+    // const handleNext = (data) => {
+    //     dispatch(setDraft(data));
+    //     dispatch(nextStep());
+    // };
 
     const handlePrevious = () => {
         dispatch(setDraft(getValues()));

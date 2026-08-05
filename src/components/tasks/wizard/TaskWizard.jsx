@@ -11,13 +11,6 @@ import AssignmentStep from "../steps/AssignmentStep";
 import ScheduleStep from "../steps/ScheduleStep";
 import ReviewStep from "../steps/ReviewStep";
 
-const steps = {
-    1: TaskInfoStep,
-    2: AssignmentStep,
-    3: ScheduleStep,
-    4: ReviewStep,
-};
-
 const TaskWizard = () => {
     const { currentStep, draft } = useSelector((state) => state.tasks.wizard);
 
@@ -25,6 +18,13 @@ const TaskWizard = () => {
         mode: "onChange",
         defaultValues: draft,
     });
+
+    const steps = {
+        1: TaskInfoStep,
+        2: AssignmentStep,
+        3: ScheduleStep,
+        4: ReviewStep,
+    };
 
     const StepComponent = steps[currentStep] || TaskInfoStep;
 

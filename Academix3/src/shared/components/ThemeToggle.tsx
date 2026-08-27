@@ -1,8 +1,7 @@
-// src/components/ThemeToggle.tsx
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
 
-export default function ThemeToggle() {
+const ThemeToggle = () => {
     const { isDark, toggleTheme } = useTheme();
 
     return (
@@ -25,4 +24,6 @@ export default function ThemeToggle() {
             )}
         </button>
     );
-}
+};
+
+export default ThemeToggle;

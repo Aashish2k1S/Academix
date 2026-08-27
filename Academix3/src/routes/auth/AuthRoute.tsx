@@ -31,10 +31,13 @@
 //   ],
 // };
 
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { type RouteObject } from "react-router";
 
 const AuthLayout = lazy(() => import("../auth/AuthLayout"));
+
+const Skeleton = lazy(() => import("../../shared/components/Skeleton"));
+
 const Login = lazy(() => import("../../features/auth/pages/Login"));
 const ForgetPassword = lazy(
     () => import("../../features/auth/pages/ForgetPassword"),
@@ -43,6 +46,10 @@ const ResetPassword = lazy(
     () => import("../../features/auth/pages/ResetPassword"),
 );
 const FindRole = lazy(() => import("../../features/auth/pages/FindRole"));
+
+const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
+    <Suspense fallback={<Skeleton type="auth" />}>{children}</Suspense>
+);
 
 export const authRoutes: RouteObject = {
     path: "/",
@@ -53,16 +60,36 @@ export const authRoutes: RouteObject = {
             element: <Login />,
         },
         {
+            path: "",
+            element: (
+                <SuspenseWrapper>
+                    <Login />
+                </SuspenseWrapper>
+            ),
+        },
+        {
             path: "/forgetpassword",
-            element: <ForgetPassword />,
+            element: (
+                <SuspenseWrapper>
+                    <ForgetPassword />
+                </SuspenseWrapper>
+            ),
         },
         {
             path: "/resetpassword",
-            element: <ResetPassword />,
+            element: (
+                <SuspenseWrapper>
+                    <ResetPassword />
+                </SuspenseWrapper>
+            ),
         },
         {
             path: "/findrole",
-            element: <FindRole />,
+            element: (
+                <SuspenseWrapper>
+                    <FindRole />
+                </SuspenseWrapper>
+            ),
         },
     ],
 };

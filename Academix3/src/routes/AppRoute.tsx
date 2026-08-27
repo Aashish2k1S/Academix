@@ -51,10 +51,12 @@
 
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import {authRoutes} from './auth/AuthRoute';
+import { authRoutes } from "./auth/AuthRoute";
 
-const SessionManage = lazy(() => import("../features/auth/pages/SessionManage"),);
-const Skeleton = lazy(() => import("../shared/components/Skeleton"),);
+const SessionManage = lazy(
+    () => import("../features/auth/pages/SessionManage"),
+);
+const Skeleton = lazy(() => import("../shared/components/Skeleton"));
 
 // const NotFound = lazy(() => import("./notfound/NotFound"));
 
@@ -66,8 +68,16 @@ export default function AppRoutes() {
             element: <SessionManage />,
         },
         {
-            path: "/skeleton",
-            element: <Skeleton />,
+            path: "/auth",
+            element: <Skeleton type="auth" />,
+        },
+        {
+            path: "/card",
+            element: <Skeleton type="card" />,
+        },
+        {
+            path: "/page",
+            element: <Skeleton type="page" />,
         },
     ]);
 
